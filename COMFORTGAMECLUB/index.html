@@ -6,938 +6,546 @@
 <title>COMFORTGAMECLUB</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --cyan: #00e5ff;
-  --blue: #1a6fff;
-  --pink: #ff2d78;
-  --green: #00ff88;
-  --orange: #ff8c00;
-  --purple: #aa44ff;
-  --dark: #04040f;
-  --card: #0a0a20;
-  --border: #1a1a3a;
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0b0b1a;
+  --bg2:#0f0f22;
+  --card:#13132a;
+  --card2:#1a1a35;
+  --purple:#7b2fff;
+  --purple2:#9d4edd;
+  --pink:#ff2d78;
+  --cyan:#00e5ff;
+  --green:#00ff88;
+  --orange:#ff8c00;
+  --yellow:#ffe600;
+  --border:#2a2a4a;
+  --text:#c8c8e8;
+  --accent:#a855f7;
+}
+body{
+  background:var(--bg);
+  color:#fff;
+  font-family:'Rajdhani',sans-serif;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  user-select:none;
 }
 
-body {
-  background: var(--dark);
-  color: #fff;
-  font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden;
+/* ── TOP BAR ── */
+.topbar{
+  display:flex;align-items:center;
+  background:linear-gradient(90deg,#0a0a1f,#12122e,#0a0a1f);
+  border-bottom:1px solid #2a2a5a;
+  padding:0 16px;height:44px;flex-shrink:0;
+  position:relative;z-index:10;
+}
+.topbar-logo{
+  font-family:'Orbitron',monospace;
+  font-size:13px;font-weight:900;
+  background:linear-gradient(90deg,var(--cyan),var(--purple2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:3px;margin-right:30px;
+}
+.top-nav{display:flex;gap:4px;}
+.top-nav a{
+  color:#8888bb;font-size:12px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;padding:6px 14px;border-radius:6px;
+  transition:all .2s;
+}
+.top-nav a:hover,.top-nav a.active{
+  color:#fff;background:rgba(123,47,255,0.25);
+}
+.top-nav a.active{
+  color:var(--cyan);border-bottom:2px solid var(--cyan);border-radius:0;
+  background:transparent;
+}
+.topbar-right{
+  margin-left:auto;display:flex;align-items:center;gap:12px;
+}
+.clock{
+  font-family:'Orbitron',monospace;
+  font-size:16px;font-weight:700;
+  color:var(--pink);letter-spacing:2px;
+}
+.balance{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,230,0,0.1);
+  border:1px solid rgba(255,230,0,0.3);
+  border-radius:20px;padding:4px 14px;
+  font-family:'Orbitron',monospace;
+  font-size:14px;font-weight:700;color:var(--yellow);
 }
 
-/* ── PARTICLES ── */
-#particles {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none; z-index: 0;
+/* ── MAIN LAYOUT ── */
+.main{display:flex;flex:1;overflow:hidden;}
+
+/* ── LEFT SIDEBAR ── */
+.sidebar{
+  width:52px;background:#09091c;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  align-items:center;padding:12px 0;gap:8px;
+  flex-shrink:0;
 }
-
-/* ── NAVBAR ── */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 100;
-  background: rgba(4,4,15,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,229,255,0.15);
-  padding: 0 40px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 70px;
+.sb-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;cursor:pointer;transition:all .2s;
+  background:rgba(255,255,255,0.04);
+  border:1px solid transparent;
+  text-decoration:none;
 }
-
-.nav-logo {
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none;
+.sb-icon:hover{
+  background:rgba(123,47,255,0.2);
+  border-color:var(--purple);
+  transform:scale(1.1);
 }
+.sb-divider{width:28px;height:1px;background:var(--border);margin:4px 0;}
 
-.nav-logo .icon { font-size: 28px; }
-
-.nav-logo span {
-  font-family: 'Orbitron', monospace;
-  font-size: 18px; font-weight: 900;
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  letter-spacing: 3px;
-}
-
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a {
-  color: #aaa; text-decoration: none;
-  font-size: 14px; font-weight: 600; letter-spacing: 1px;
-  transition: color 0.3s;
-  text-transform: uppercase;
-}
-.nav-links a:hover { color: var(--cyan); }
-
-.nav-btn {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  color: #fff; border: none; padding: 10px 24px;
-  border-radius: 25px; font-family: 'Rajdhani', sans-serif;
-  font-size: 14px; font-weight: 700; letter-spacing: 1px;
-  cursor: pointer; text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(0,229,255,0.3);
-  transition: all 0.3s;
-}
-.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,229,255,0.5); }
-
-/* ── HERO ── */
-.hero {
-  position: relative; min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; z-index: 1; padding: 0 20px;
+/* ── CONTENT ── */
+.content{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:16px 20px;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(26,111,255,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(0,229,255,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(170,68,255,0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at 10% 20%,rgba(123,47,255,0.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 90% 80%,rgba(0,229,255,0.05) 0%,transparent 50%),
+    var(--bg);
+}
+.content::-webkit-scrollbar{width:4px;}
+.content::-webkit-scrollbar-track{background:transparent;}
+.content::-webkit-scrollbar-thumb{background:#2a2a5a;border-radius:2px;}
+
+/* ── SECTION TITLE ── */
+.sec-title{
+  font-family:'Orbitron',monospace;
+  font-size:11px;font-weight:700;
+  color:#5555aa;letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-title::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,#2a2a4a,transparent);
 }
 
-.hero-content { max-width: 900px; }
-
-.hero-badge {
-  display: inline-block;
-  background: rgba(0,229,255,0.1);
-  border: 1px solid rgba(0,229,255,0.3);
-  color: var(--cyan); padding: 6px 20px;
-  border-radius: 20px; font-size: 12px;
-  letter-spacing: 3px; text-transform: uppercase;
-  margin-bottom: 24px;
-  animation: fadeInDown 0.8s ease;
+/* ── LAUNCHERS GRID ── */
+.launchers-grid{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;
 }
-
-.hero h1 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(36px, 7vw, 90px);
-  font-weight: 900; line-height: 1;
-  margin-bottom: 16px;
-  animation: fadeInUp 0.8s ease 0.2s both;
+.launcher-card{
+  width:82px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:transform .2s;
 }
-
-.hero h1 .line1 {
-  background: linear-gradient(90deg, #fff, #ccc);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  display: block;
+.launcher-card:hover{transform:translateY(-4px);}
+.launcher-icon{
+  width:82px;height:82px;border-radius:16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+  transition:all .2s;
+  position:relative;overflow:hidden;
 }
-
-.hero h1 .line2 {
-  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  display: block;
+.launcher-icon::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.05),transparent);
 }
-
-.hero p {
-  font-size: 18px; color: #8888aa; max-width: 600px;
-  margin: 0 auto 40px; line-height: 1.6;
-  animation: fadeInUp 0.8s ease 0.4s both;
+.launcher-card:hover .launcher-icon{
+  border-color:var(--purple2);
+  box-shadow:0 0 20px rgba(123,47,255,0.3);
 }
-
-.hero-btns {
-  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease 0.6s both;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  color: #fff; border: none; padding: 16px 40px;
-  border-radius: 50px; font-family: 'Rajdhani', sans-serif;
-  font-size: 16px; font-weight: 700; letter-spacing: 2px;
-  cursor: pointer; text-transform: uppercase;
-  box-shadow: 0 0 30px rgba(0,229,255,0.3);
-  transition: all 0.3s; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,229,255,0.5); }
-
-.btn-outline {
-  background: transparent;
-  color: var(--cyan); border: 1px solid rgba(0,229,255,0.4);
-  padding: 16px 40px; border-radius: 50px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 16px; font-weight: 700; letter-spacing: 2px;
-  cursor: pointer; text-transform: uppercase;
-  transition: all 0.3s; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-outline:hover {
-  background: rgba(0,229,255,0.1);
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px rgba(0,229,255,0.2);
-}
-
-/* ── STATS ── */
-.stats {
-  position: relative; z-index: 1;
-  display: flex; justify-content: center; gap: 0;
-  background: rgba(10,10,32,0.8);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-}
-
-.stat-item {
-  flex: 1; max-width: 200px;
-  padding: 30px 20px; text-align: center;
-  border-right: 1px solid var(--border);
-}
-.stat-item:last-child { border-right: none; }
-
-.stat-num {
-  font-family: 'Orbitron', monospace;
-  font-size: 36px; font-weight: 900;
-  background: linear-gradient(135deg, var(--cyan), var(--blue));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.stat-label { color: #666; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-
-/* ── SECTION ── */
-section { position: relative; z-index: 1; padding: 80px 40px; }
-
-.section-title {
-  text-align: center; margin-bottom: 60px;
-}
-.section-title h2 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(24px, 4vw, 42px);
-  font-weight: 900; margin-bottom: 12px;
-}
-.section-title h2 span {
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.section-title p { color: #666; font-size: 16px; }
-
-.section-line {
-  width: 60px; height: 3px;
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  margin: 16px auto 0; border-radius: 2px;
+.launcher-name{
+  font-size:11px;color:#8888bb;text-align:center;
+  font-weight:600;letter-spacing:.5px;
 }
 
 /* ── GAMES GRID ── */
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; max-width: 1200px; margin: 0 auto;
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:12px;margin-bottom:20px;
 }
+.game-card{
+  border-radius:12px;overflow:hidden;cursor:pointer;
+  position:relative;transition:all .25s;
+  background:var(--card);border:1px solid var(--border);
+  aspect-ratio:3/4;
+  display:flex;flex-direction:column;
+}
+.game-card:hover{
+  transform:translateY(-5px) scale(1.02);
+  border-color:var(--purple2);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 20px rgba(123,47,255,0.2);
+}
+.game-thumb{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  font-size:52px;
+  background:linear-gradient(135deg,var(--card),var(--card2));
+  position:relative;
+}
+.game-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.8));
+}
+.game-info{
+  padding:8px;background:var(--card);
+}
+.game-title{
+  font-size:11px;font-weight:700;color:#ddd;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:.3px;
+}
+.game-genre{
+  font-size:10px;color:#5555aa;
+  margin-top:2px;letter-spacing:.5px;
+}
+.game-badge{
+  position:absolute;top:8px;right:8px;z-index:2;
+  font-size:9px;font-weight:700;padding:2px 7px;
+  border-radius:8px;letter-spacing:1px;
+  text-transform:uppercase;
+}
+.badge-new{background:rgba(0,255,136,.2);color:var(--green);}
+.badge-hot{background:rgba(255,45,120,.2);color:var(--pink);}
+.badge-top{background:rgba(255,230,0,.2);color:var(--yellow);}
 
-.game-category {
-  background: var(--card);
-  border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border);
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative; overflow: hidden;
+/* ── BOTTOM BAR ── */
+.bottombar{
+  height:52px;background:#09091c;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 16px;gap:14px;flex-shrink:0;
 }
-.game-category::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
+.bb-icon{
+  display:flex;align-items:center;gap:6px;
+  color:#5555aa;font-size:13px;cursor:pointer;
+  padding:6px 12px;border-radius:8px;
+  transition:all .2s;font-weight:600;
 }
-.game-category:hover {
-  transform: translateY(-5px);
+.bb-icon:hover{background:rgba(123,47,255,0.15);color:#fff;}
+.bb-icon .ico{font-size:18px;}
+.bb-divider{width:1px;height:28px;background:var(--border);}
+.bb-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.bb-tip{
+  font-size:11px;color:#333366;
+  letter-spacing:.5px;
 }
+.bb-tip span{color:var(--purple2);}
 
-.cat-shooter::before { background: linear-gradient(90deg, var(--pink), transparent); }
-.cat-shooter { box-shadow: 0 0 0 1px rgba(255,45,120,0.1); }
-.cat-shooter:hover { box-shadow: 0 20px 40px rgba(255,45,120,0.2); }
-
-.cat-race::before { background: linear-gradient(90deg, var(--orange), transparent); }
-.cat-race { box-shadow: 0 0 0 1px rgba(255,140,0,0.1); }
-.cat-race:hover { box-shadow: 0 20px 40px rgba(255,140,0,0.2); }
-
-.cat-fight::before { background: linear-gradient(90deg, var(--purple), transparent); }
-.cat-fight { box-shadow: 0 0 0 1px rgba(170,68,255,0.1); }
-.cat-fight:hover { box-shadow: 0 20px 40px rgba(170,68,255,0.2); }
-
-.cat-open::before { background: linear-gradient(90deg, var(--cyan), transparent); }
-.cat-open { box-shadow: 0 0 0 1px rgba(0,229,255,0.1); }
-.cat-open:hover { box-shadow: 0 20px 40px rgba(0,229,255,0.2); }
-
-.cat-sport::before { background: linear-gradient(90deg, var(--green), transparent); }
-.cat-sport { box-shadow: 0 0 0 1px rgba(0,255,136,0.1); }
-.cat-sport:hover { box-shadow: 0 20px 40px rgba(0,255,136,0.2); }
-
-.cat-other::before { background: linear-gradient(90deg, #ffdd00, transparent); }
-.cat-other { box-shadow: 0 0 0 1px rgba(255,221,0,0.1); }
-.cat-other:hover { box-shadow: 0 20px 40px rgba(255,221,0,0.15); }
-
-.cat-header {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 20px;
-}
-.cat-icon { font-size: 28px; }
-.cat-name {
-  font-family: 'Orbitron', monospace;
-  font-size: 15px; font-weight: 700; letter-spacing: 1px;
-}
-.cat-count {
-  margin-left: auto;
-  font-size: 11px; padding: 3px 10px;
-  border-radius: 10px; font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.game-list { display: flex; flex-direction: column; gap: 8px; }
-.game-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s; cursor: pointer;
-}
-.game-item:hover {
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(255,255,255,0.12);
-  transform: translateX(4px);
-}
-.game-item .g-icon { font-size: 18px; width: 24px; text-align: center; }
-.game-item .g-name { font-size: 14px; font-weight: 600; color: #ddd; }
-.game-item .g-tag {
-  margin-left: auto; font-size: 10px;
-  padding: 2px 8px; border-radius: 6px;
-  text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
-}
-
-/* ── FEATURES ── */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px; max-width: 1100px; margin: 0 auto;
-}
-
-.feature-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px; padding: 32px 24px;
-  text-align: center; transition: all 0.3s;
-  position: relative; overflow: hidden;
-}
-.feature-card::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 0; right: 0; height: 2px;
-  opacity: 0; transition: opacity 0.3s;
-}
-.feature-card:hover { transform: translateY(-6px); }
-.feature-card:hover::after { opacity: 1; }
-
-.f1::after { background: linear-gradient(90deg, var(--cyan), var(--blue)); }
-.f2::after { background: linear-gradient(90deg, var(--pink), var(--purple)); }
-.f3::after { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-.f4::after { background: linear-gradient(90deg, var(--orange), var(--pink)); }
-.f5::after { background: linear-gradient(90deg, var(--purple), var(--blue)); }
-.f6::after { background: linear-gradient(90deg, #ffdd00, var(--orange)); }
-
-.feature-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
-
-.feat-icon {
-  font-size: 44px; margin-bottom: 16px;
-  display: block;
-  filter: drop-shadow(0 0 10px currentColor);
-}
-.feat-title {
-  font-family: 'Orbitron', monospace;
-  font-size: 14px; font-weight: 700;
-  margin-bottom: 10px; letter-spacing: 1px;
-}
-.feat-desc { color: #666; font-size: 14px; line-height: 1.6; }
-
-/* ── PRICING ── */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px; max-width: 900px; margin: 0 auto;
-}
-
-.price-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px; padding: 36px 28px;
-  text-align: center; transition: all 0.3s;
-  position: relative; overflow: hidden;
-}
-
-.price-card.popular {
-  border-color: var(--cyan);
-  box-shadow: 0 0 40px rgba(0,229,255,0.15);
-}
-
-.popular-badge {
-  position: absolute; top: 16px; right: 16px;
-  background: linear-gradient(135deg, var(--cyan), var(--blue));
-  color: #fff; font-size: 10px; font-weight: 700;
-  padding: 4px 12px; border-radius: 12px;
-  letter-spacing: 1px; text-transform: uppercase;
-}
-
-.price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,229,255,0.15); }
-
-.price-name {
-  font-family: 'Orbitron', monospace;
-  font-size: 16px; font-weight: 700;
-  color: var(--cyan); margin-bottom: 8px;
-  letter-spacing: 2px;
-}
-.price-amount {
-  font-family: 'Orbitron', monospace;
-  font-size: 48px; font-weight: 900; color: #fff;
-  margin: 16px 0 4px;
-}
-.price-amount span { font-size: 18px; color: #666; }
-.price-period { color: #555; font-size: 13px; margin-bottom: 24px; }
-
-.price-features { list-style: none; margin-bottom: 28px; }
-.price-features li {
-  padding: 8px 0; border-bottom: 1px solid var(--border);
-  font-size: 14px; color: #aaa;
-  display: flex; align-items: center; gap: 8px;
-}
-.price-features li .check { color: var(--green); font-size: 16px; }
-
-.btn-price {
-  width: 100%; padding: 14px;
-  border-radius: 50px; font-family: 'Rajdhani', sans-serif;
-  font-size: 15px; font-weight: 700; letter-spacing: 2px;
-  cursor: pointer; text-transform: uppercase; transition: all 0.3s;
-  border: 1px solid rgba(0,229,255,0.4); color: var(--cyan);
-  background: transparent;
-}
-.btn-price:hover { background: rgba(0,229,255,0.1); }
-.btn-price.filled {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  color: #fff; border: none;
-  box-shadow: 0 0 20px rgba(0,229,255,0.3);
-}
-.btn-price.filled:hover { box-shadow: 0 0 40px rgba(0,229,255,0.5); transform: translateY(-2px); }
-
-/* ── FOOTER ── */
-footer {
-  position: relative; z-index: 1;
-  background: rgba(4,4,15,0.9);
-  border-top: 1px solid var(--border);
-  padding: 60px 40px 30px;
-}
-
-.footer-top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px; margin-bottom: 40px;
-  max-width: 1200px; margin: 0 auto 40px;
-}
-
-.footer-brand .logo {
-  font-family: 'Orbitron', monospace;
-  font-size: 20px; font-weight: 900;
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom: 12px; display: block;
-}
-.footer-brand p { color: #555; font-size: 13px; line-height: 1.7; max-width: 240px; }
-
-.footer-col h4 {
-  font-family: 'Orbitron', monospace;
-  font-size: 12px; color: var(--cyan);
-  letter-spacing: 2px; margin-bottom: 16px;
-  text-transform: uppercase;
-}
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 10px; }
-.footer-col ul li a {
-  color: #555; text-decoration: none;
-  font-size: 13px; transition: color 0.2s;
-}
-.footer-col ul li a:hover { color: #fff; }
-
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 24px; max-width: 1200px;
-  margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.footer-bottom p { color: #444; font-size: 12px; }
-.socials { display: flex; gap: 12px; }
-.social-btn {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: var(--card); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; cursor: pointer; transition: all 0.3s;
-  text-decoration: none;
-}
-.social-btn:hover {
-  border-color: var(--cyan);
-  box-shadow: 0 0 15px rgba(0,229,255,0.3);
-  transform: translateY(-2px);
-}
-
-/* ── SCROLL PROGRESS ── */
-#progress {
-  position: fixed; top: 0; left: 0;
-  height: 3px; z-index: 999;
-  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
-  transition: width 0.1s;
-}
-
-/* ── GLOW LINE ── */
-.glow-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  opacity: 0.3; margin: 0;
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0,229,255,0.2); }
-  50% { box-shadow: 0 0 40px rgba(0,229,255,0.5); }
-}
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.float { animation: float 4s ease-in-out infinite; }
-.pulse { animation: pulse-glow 2s ease-in-out infinite; }
-
-/* ── HERO DECORATION ── */
-.hero-ring {
-  position: absolute; border-radius: 50%;
-  border: 1px solid rgba(0,229,255,0.08);
-  animation: rotate 20s linear infinite;
-}
-.ring1 { width: 600px; height: 600px; top: 50%; left: 50%; margin: -300px 0 0 -300px; }
-.ring2 { width: 800px; height: 800px; top: 50%; left: 50%; margin: -400px 0 0 -400px; animation-direction: reverse; animation-duration: 30s; }
-.ring3 { width: 1000px; height: 1000px; top: 50%; left: 50%; margin: -500px 0 0 -500px; animation-duration: 40s; }
-
-.hero-emoji {
-  font-size: 80px; display: block; margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 30px rgba(0,229,255,0.4));
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  section { padding: 60px 20px; }
-  .footer-top { grid-template-columns: 1fr; }
-  .stats { flex-wrap: wrap; }
-  .stat-item { min-width: 50%; }
-}
-
+/* ── SCROLLBAR HIDDEN ON RESIZE ── */
 </style>
 </head>
 <body>
 
-<!-- Progress bar -->
-<div id="progress"></div>
-
-<!-- Particles -->
-<canvas id="particles"></canvas>
-
-<!-- NAVBAR -->
-<nav>
-  <a href="#" class="nav-logo">
-    <span class="icon">🎮</span>
-    <span>COMFORTGAMECLUB</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#games">O'yinlar</a></li>
-    <li><a href="#features">Xizmatlar</a></li>
-    <li><a href="#pricing">Narxlar</a></li>
-    <li><a href="#contact">Aloqa</a></li>
-  </ul>
-  <button class="nav-btn">🎮 Hozir O'yna</button>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-ring ring1"></div>
-  <div class="hero-ring ring2"></div>
-  <div class="hero-ring ring3"></div>
-  <div class="hero-content">
-    <span class="hero-badge">⚡ Premium Gaming Experience</span>
-    <span class="hero-emoji">🎮</span>
-    <h1>
-      <span class="line1">COMFORT</span>
-      <span class="line2">GAMECLUB</span>
-    </h1>
-    <p>Shahar markazidagi eng zamonaviy gaming klub. Ultra tezkor kompyuterlar, professional gaming qurilmalar va cheksiz qiziqarli o'yinlar.</p>
-    <div class="hero-btns">
-      <a href="#games" class="btn-primary">🕹️ O'yinlarni Ko'r</a>
-      <a href="#pricing" class="btn-outline">💰 Narxlar</a>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="stat-item">
-    <div class="stat-num" data-count="50">0</div>
-    <div class="stat-label">Gaming PC</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" data-count="200">0</div>
-    <div class="stat-label">O'yinlar</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" data-count="5000">0</div>
-    <div class="stat-label">Mijozlar</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" data-count="4">0</div>
-    <div class="stat-label">Yillik Tajriba</div>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">🎮 COMFORTGAMECLUB</div>
+  <nav class="top-nav">
+    <a href="#" class="active">Barcha o'yinlar</a>
+    <a href="#">Onlayn o'yinlar</a>
+    <a href="#">Counter-Strike</a>
+    <a href="#">Dasturlar</a>
+    <a href="#">Internet</a>
+  </nav>
+  <div class="topbar-right">
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="balance">💰 <span id="balance">45</span> so'm/min</div>
   </div>
 </div>
 
-<div class="glow-divider"></div>
+<div class="main">
 
-<!-- GAMES -->
-<section id="games">
-  <div class="section-title">
-    <h2>O'YINLAR <span>MENYUSI</span></h2>
-    <p>Barcha janrdagi eng mashhur o'yinlar sizni kutmoqda</p>
-    <div class="section-line"></div>
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-icon" title="Steam">🎮</div>
+    <div class="sb-icon" title="Discord">💬</div>
+    <div class="sb-icon" title="Chrome">🌐</div>
+    <div class="sb-icon" title="YouTube">▶️</div>
+    <div class="sb-divider"></div>
+    <div class="sb-icon" title="Sozlamalar">⚙️</div>
+    <div class="sb-icon" title="Profil">👤</div>
   </div>
 
-  <div class="games-grid">
+  <!-- MAIN CONTENT -->
+  <div class="content">
 
-    <!-- SHOOTER -->
-    <div class="game-category cat-shooter">
-      <div class="cat-header">
-        <span class="cat-icon">🔫</span>
-        <span class="cat-name" style="color:#ff2d78">SHOOTER</span>
-        <span class="cat-count" style="background:rgba(255,45,120,0.15);color:#ff2d78">8 O'YIN</span>
+    <!-- LAUNCHERS -->
+    <div class="sec-title">LAUNCHERLAR</div>
+    <div class="launchers-grid">
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#1b2838,#2a475e);">🎮</div>
+        <div class="launcher-name">Steam</div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">💣</span><span class="g-name">Counter-Strike 2</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">FPS</span></div>
-        <div class="game-item"><span class="g-icon">⚡</span><span class="g-name">Valorant</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">FPS</span></div>
-        <div class="game-item"><span class="g-icon">🪖</span><span class="g-name">Call of Duty: Warzone</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">BR</span></div>
-        <div class="game-item"><span class="g-icon">🎯</span><span class="g-name">Apex Legends</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">BR</span></div>
-        <div class="game-item"><span class="g-icon">🪂</span><span class="g-name">PUBG</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">BR</span></div>
-        <div class="game-item"><span class="g-icon">🛡️</span><span class="g-name">Rainbow Six Siege</span><span class="g-tag" style="background:rgba(255,45,120,0.15);color:#ff2d78">TCS</span></div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#1c1c1c,#333);">🏆</div>
+        <div class="launcher-name">IOCup</div>
       </div>
-    </div>
-
-    <!-- GONKALAR -->
-    <div class="game-category cat-race">
-      <div class="cat-header">
-        <span class="cat-icon">🏎️</span>
-        <span class="cat-name" style="color:#ff8c00">GONKALAR</span>
-        <span class="cat-count" style="background:rgba(255,140,0,0.15);color:#ff8c00">7 O'YIN</span>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#1a1a2e,#333);">🟣</div>
+        <div class="launcher-name">Epic Games</div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">🔥</span><span class="g-name">Need for Speed Heat</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">RACE</span></div>
-        <div class="game-item"><span class="g-icon">🏆</span><span class="g-name">Forza Horizon 5</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">RACE</span></div>
-        <div class="game-item"><span class="g-icon">🏁</span><span class="g-name">F1 2024</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">SIM</span></div>
-        <div class="game-item"><span class="g-icon">🚗</span><span class="g-name">Assetto Corsa</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">SIM</span></div>
-        <div class="game-item"><span class="g-icon">🌊</span><span class="g-name">The Crew Motorfest</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">RACE</span></div>
-        <div class="game-item"><span class="g-icon">🏔️</span><span class="g-name">WRC Generations</span><span class="g-tag" style="background:rgba(255,140,0,0.15);color:#ff8c00">RALLY</span></div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#e8003a,#9b0026);">🔴</div>
+        <div class="launcher-name">EA Play</div>
       </div>
-    </div>
-
-    <!-- JANGOVAR -->
-    <div class="game-category cat-fight">
-      <div class="cat-header">
-        <span class="cat-icon">⚔️</span>
-        <span class="cat-name" style="color:#aa44ff">JANGOVAR</span>
-        <span class="cat-count" style="background:rgba(170,68,255,0.15);color:#aa44ff">5 O'YIN</span>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#0066cc,#00aaff);">⚔️</div>
+        <div class="launcher-name">Battle.net</div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">💀</span><span class="g-name">Mortal Kombat 1</span><span class="g-tag" style="background:rgba(170,68,255,0.15);color:#aa44ff">FIGHT</span></div>
-        <div class="game-item"><span class="g-icon">👊</span><span class="g-name">Street Fighter 6</span><span class="g-tag" style="background:rgba(170,68,255,0.15);color:#aa44ff">FIGHT</span></div>
-        <div class="game-item"><span class="g-icon">🥊</span><span class="g-name">Tekken 8</span><span class="g-tag" style="background:rgba(170,68,255,0.15);color:#aa44ff">FIGHT</span></div>
-        <div class="game-item"><span class="g-icon">🗡️</span><span class="g-name">For Honor</span><span class="g-tag" style="background:rgba(170,68,255,0.15);color:#aa44ff">ACTION</span></div>
-        <div class="game-item"><span class="g-icon">🛡️</span><span class="g-name">Mordhau</span><span class="g-tag" style="background:rgba(170,68,255,0.15);color:#aa44ff">MELEE</span></div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#d4202a,#ff4444);">🔴</div>
+        <div class="launcher-name">Riot Games</div>
+      </div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#0066cc,#1a8cff);">🔵</div>
+        <div class="launcher-name">GameLoop</div>
+      </div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#ff6600,#ff9900);">🟠</div>
+        <div class="launcher-name">FACEIT</div>
+      </div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#cc0000,#ff2200);">🏎️</div>
+        <div class="launcher-name">FASTCUP</div>
+      </div>
+      <div class="launcher-card">
+        <div class="launcher-icon" style="background:linear-gradient(135deg,#0044aa,#0066ff);">🔷</div>
+        <div class="launcher-name">Wargaming</div>
       </div>
     </div>
 
-    <!-- OCHIQ DUNYO -->
-    <div class="game-category cat-open">
-      <div class="cat-header">
-        <span class="cat-icon">🌍</span>
-        <span class="cat-name" style="color:#00e5ff">OCHIQ DUNYO</span>
-        <span class="cat-count" style="background:rgba(0,229,255,0.15);color:#00e5ff">6 O'YIN</span>
+    <!-- ALL GAMES -->
+    <div class="sec-title">BARCHA O'YINLAR</div>
+    <div class="games-grid">
+
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e);">
+          🦊
+          <span class="game-badge badge-hot">🔥 HOT</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Apex Legends</div>
+          <div class="game-genre">Battle Royale</div>
+        </div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">🌆</span><span class="g-name">GTA V</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">OPEN</span></div>
-        <div class="game-item"><span class="g-icon">🤠</span><span class="g-name">Red Dead Redemption 2</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">OPEN</span></div>
-        <div class="game-item"><span class="g-icon">🤖</span><span class="g-name">Cyberpunk 2077</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">RPG</span></div>
-        <div class="game-item"><span class="g-icon">🐺</span><span class="g-name">The Witcher 3</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">RPG</span></div>
-        <div class="game-item"><span class="g-icon">⚔️</span><span class="g-name">Elden Ring</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">RPG</span></div>
-        <div class="game-item"><span class="g-icon">🗡️</span><span class="g-name">AC: Mirage</span><span class="g-tag" style="background:rgba(0,229,255,0.15);color:#00e5ff">ACT</span></div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a1628,#1a2d4e);">
+          🗡️
+          <span class="game-badge badge-top">⭐ TOP</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Assassin's Creed</div>
+          <div class="game-genre">Open World</div>
+        </div>
       </div>
-    </div>
 
-    <!-- SPORT -->
-    <div class="game-category cat-sport">
-      <div class="cat-header">
-        <span class="cat-icon">🏀</span>
-        <span class="cat-name" style="color:#00ff88">SPORT</span>
-        <span class="cat-count" style="background:rgba(0,255,136,0.15);color:#00ff88">4 O'YIN</span>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a1028,#2e1a40);">
+          🪖
+          <span class="game-badge badge-new">✨ NEW</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Battlefield V</div>
+          <div class="game-genre">FPS Shooter</div>
+        </div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">⚽</span><span class="g-name">EA Sports FC 24</span><span class="g-tag" style="background:rgba(0,255,136,0.15);color:#00ff88">SPORT</span></div>
-        <div class="game-item"><span class="g-icon">🏀</span><span class="g-name">NBA 2K24</span><span class="g-tag" style="background:rgba(0,255,136,0.15);color:#00ff88">SPORT</span></div>
-        <div class="game-item"><span class="g-icon">🤼</span><span class="g-name">WWE 2K24</span><span class="g-tag" style="background:rgba(0,255,136,0.15);color:#00ff88">SPORT</span></div>
-        <div class="game-item"><span class="g-icon">🏟️</span><span class="g-name">eFootball 2024</span><span class="g-tag" style="background:rgba(0,255,136,0.15);color:#00ff88">SPORT</span></div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a2010,#1a4020);">
+          🏎️
+        </div>
+        <div class="game-info">
+          <div class="game-title">Blur</div>
+          <div class="game-genre">Racing</div>
+        </div>
       </div>
-    </div>
 
-    <!-- BOSHQALAR -->
-    <div class="game-category cat-other">
-      <div class="cat-header">
-        <span class="cat-icon">🎲</span>
-        <span class="cat-name" style="color:#ffdd00">BOSHQALAR</span>
-        <span class="cat-count" style="background:rgba(255,221,0,0.15);color:#ffdd00">5 O'YIN</span>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#201000,#402200);">
+          💣
+          <span class="game-badge badge-top">⭐ TOP</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Generals: Reloaded</div>
+          <div class="game-genre">Strategy</div>
+        </div>
       </div>
-      <div class="game-list">
-        <div class="game-item"><span class="g-icon">⛏️</span><span class="g-name">Minecraft</span><span class="g-tag" style="background:rgba(255,221,0,0.15);color:#ffdd00">SAND</span></div>
-        <div class="game-item"><span class="g-icon">🧱</span><span class="g-name">Roblox</span><span class="g-tag" style="background:rgba(255,221,0,0.15);color:#ffdd00">SAND</span></div>
-        <div class="game-item"><span class="g-icon">👾</span><span class="g-name">Among Us</span><span class="g-tag" style="background:rgba(255,221,0,0.15);color:#ffdd00">PARTY</span></div>
-        <div class="game-item"><span class="g-icon">🫘</span><span class="g-name">Fall Guys</span><span class="g-tag" style="background:rgba(255,221,0,0.15);color:#ffdd00">PARTY</span></div>
-        <div class="game-item"><span class="g-icon">🎮</span><span class="g-name">Steam Library</span><span class="g-tag" style="background:rgba(255,221,0,0.15);color:#ffdd00">ALL</span></div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a1000,#332000);">
+          ⚡
+        </div>
+        <div class="game-info">
+          <div class="game-title">Generals: Zero Hour</div>
+          <div class="game-genre">Strategy</div>
+        </div>
       </div>
-    </div>
 
-  </div>
-</section>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);">
+          🔫
+          <span class="game-badge badge-hot">🔥 HOT</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">COD: Black Ops 2</div>
+          <div class="game-genre">FPS Shooter</div>
+        </div>
+      </div>
 
-<div class="glow-divider"></div>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0d0d0d,#222);">
+          💀
+        </div>
+        <div class="game-info">
+          <div class="game-title">COD: Black Ops 3</div>
+          <div class="game-genre">FPS Shooter</div>
+        </div>
+      </div>
 
-<!-- FEATURES -->
-<section id="features" style="background: radial-gradient(ellipse at 50% 0%, rgba(26,111,255,0.06) 0%, transparent 70%);">
-  <div class="section-title">
-    <h2>NIMA UCHUN <span>BIZ?</span></h2>
-    <p>Eng yaxshi gaming tajribasi uchun yaratilgan</p>
-    <div class="section-line"></div>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card f1">
-      <span class="feat-icon">⚡</span>
-      <div class="feat-title">ULTRA TEZKOR PC</div>
-      <div class="feat-desc">RTX 4090, i9 protsessor, 32GB RAM. 4K 144Hz monitor bilan haqiqiy gaming!</div>
-    </div>
-    <div class="feature-card f2">
-      <span class="feat-icon">🔒</span>
-      <div class="feat-title">AQLLI BOSHQARUV</div>
-      <div class="feat-desc">Admin panel orqali barcha PC lar real-time nazorat qilinadi. Xavfsiz va qulay.</div>
-    </div>
-    <div class="feature-card f3">
-      <span class="feat-icon">🌐</span>
-      <div class="feat-title">1 GBPS INTERNET</div>
-      <div class="feat-desc">Tezkor optik tolali internet. Ping 1ms dan past. Lag yo'q!</div>
-    </div>
-    <div class="feature-card f4">
-      <span class="feat-icon">🎧</span>
-      <div class="feat-title">PRO QURILMALAR</div>
-      <div class="feat-desc">Razer, Logitech, SteelSeries professional gaming sichqoncha, klaviatura va quloqchin.</div>
-    </div>
-    <div class="feature-card f5">
-      <span class="feat-icon">🏆</span>
-      <div class="feat-title">TURNIRLAR</div>
-      <div class="feat-desc">Har hafta turli o'yinlar bo'yicha turnirlar. G'oliblar sovrin oladi!</div>
-    </div>
-    <div class="feature-card f6">
-      <span class="feat-icon">☕</span>
-      <div class="feat-title">QULAY MUHIT</div>
-      <div class="feat-desc">Konditsioner, qulay o'rindiqlar, choy-qahva. Soatlab o'ynashga qulay!</div>
-    </div>
-  </div>
-</section>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#100a20,#1e1240);">
+          ☠️
+          <span class="game-badge badge-new">✨ NEW</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">COD: BO3 Zombies</div>
+          <div class="game-genre">FPS Shooter</div>
+        </div>
+      </div>
 
-<div class="glow-divider"></div>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0010,#330020);">
+          💣
+          <span class="game-badge badge-hot">🔥 HOT</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Counter-Strike 2</div>
+          <div class="game-genre">Tactical FPS</div>
+        </div>
+      </div>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="section-title">
-    <h2>NARX <span>REJALARI</span></h2>
-    <p>Har bir budget uchun qulay tarif</p>
-    <div class="section-line"></div>
-  </div>
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="price-name">STANDART</div>
-      <div class="price-amount">5 000<span> so'm</span></div>
-      <div class="price-period">/ 1 soat</div>
-      <ul class="price-features">
-        <li><span class="check">✓</span> Barcha o'yinlar</li>
-        <li><span class="check">✓</span> Tezkor internet</li>
-        <li><span class="check">✓</span> Gaming qurilmalar</li>
-        <li><span class="check">✓</span> Choy / Qahva</li>
-      </ul>
-      <button class="btn-price">Tanlash</button>
-    </div>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#001a33,#003366);">
+          🎯
+        </div>
+        <div class="game-info">
+          <div class="game-title">Valorant</div>
+          <div class="game-genre">Tactical FPS</div>
+        </div>
+      </div>
 
-    <div class="price-card popular pulse">
-      <div class="popular-badge">⭐ MASHHUR</div>
-      <div class="price-name">VIP</div>
-      <div class="price-amount">40 000<span> so'm</span></div>
-      <div class="price-period">/ 10 soat paket</div>
-      <ul class="price-features">
-        <li><span class="check">✓</span> Barcha o'yinlar</li>
-        <li><span class="check">✓</span> VIP o'rindiq</li>
-        <li><span class="check">✓</span> PRO qurilmalar</li>
-        <li><span class="check">✓</span> Choy / Qahva / Snack</li>
-        <li><span class="check">✓</span> Turnir imtiyozi</li>
-      </ul>
-      <button class="btn-price filled">Tanlash</button>
-    </div>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a1a0a,#1a3a1a);">
+          🌍
+          <span class="game-badge badge-top">⭐ TOP</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">GTA V</div>
+          <div class="game-genre">Open World</div>
+        </div>
+      </div>
 
-    <div class="price-card">
-      <div class="price-name">OYLIK</div>
-      <div class="price-amount">120 000<span> so'm</span></div>
-      <div class="price-period">/ oy</div>
-      <ul class="price-features">
-        <li><span class="check">✓</span> Cheksiz vaqt</li>
-        <li><span class="check">✓</span> Barcha xizmatlar</li>
-        <li><span class="check">✓</span> Turnir ro'yxati</li>
-        <li><span class="check">✓</span> Shaxsiy profil</li>
-        <li><span class="check">✓</span> 20% chegirma</li>
-      </ul>
-      <button class="btn-price">Tanlash</button>
-    </div>
-  </div>
-</section>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0a00,#331500);">
+          🤠
+        </div>
+        <div class="game-info">
+          <div class="game-title">RDR 2</div>
+          <div class="game-genre">Open World</div>
+        </div>
+      </div>
 
-<div class="glow-divider"></div>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#00101a,#002233);">
+          🤖
+          <span class="game-badge badge-new">✨ NEW</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">Cyberpunk 2077</div>
+          <div class="game-genre">RPG</div>
+        </div>
+      </div>
 
-<!-- FOOTER -->
-<footer id="contact">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <span class="logo">🎮 COMFORTGAMECLUB</span>
-      <p>Shahar markazidagi eng zamonaviy va qulay gaming klub. Sizning qulayligingiz — bizning maqsadimiz.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navigatsiya</h4>
-      <ul>
-        <li><a href="#games">O'yinlar</a></li>
-        <li><a href="#features">Xizmatlar</a></li>
-        <li><a href="#pricing">Narxlar</a></li>
-        <li><a href="#contact">Aloqa</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>O'yinlar</h4>
-      <ul>
-        <li><a href="#">Shooter</a></li>
-        <li><a href="#">Gonkalar</a></li>
-        <li><a href="#">Jangovar</a></li>
-        <li><a href="#">Sport</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Aloqa</h4>
-      <ul>
-        <li><a href="#">📍 Shahar markazi</a></li>
-        <li><a href="#">📞 +998 90 000 00 00</a></li>
-        <li><a href="#">💬 Telegram</a></li>
-        <li><a href="#">📸 Instagram</a></li>
-      </ul>
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0a1a,#2d1a2d);">
+          ⚽
+        </div>
+        <div class="game-info">
+          <div class="game-title">EA FC 24</div>
+          <div class="game-genre">Sport</div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#001a00,#003300);">
+          🏀
+          <span class="game-badge badge-hot">🔥 HOT</span>
+        </div>
+        <div class="game-info">
+          <div class="game-title">NBA 2K24</div>
+          <div class="game-genre">Sport</div>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© 2025 COMFORTGAMECLUB. Barcha huquqlar himoyalangan.</p>
-    <div class="socials">
-      <a class="social-btn" href="#">📱</a>
-      <a class="social-btn" href="#">💬</a>
-      <a class="social-btn" href="#">📸</a>
-    </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottombar">
+  <div class="bb-icon"><span class="ico">🎧</span> Audio</div>
+  <div class="bb-icon"><span class="ico">🎤</span> Mikrofon</div>
+  <div class="bb-icon"><span class="ico">👓</span> Display</div>
+  <div class="bb-divider"></div>
+  <div class="bb-tip">F1 — <span>yordam</span></div>
+  <div class="bb-tip">F2 — <span>shovqin</span></div>
+  <div class="bb-tip">F3 — <span>reklama kartochkalari</span></div>
+  <div class="bb-tip">F5 — <span>PRIMO saytiga o'tish</span></div>
+  <div class="bb-right">
+    <div class="bb-icon"><span class="ico">💰</span> <span id="bal2">45</span></div>
   </div>
-</footer>
+</div>
 
 <script>
-// ── PARTICLES ──
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-for (let i = 0; i < 80; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.5 + 0.3,
-    dx: (Math.random() - 0.5) * 0.3,
-    dy: (Math.random() - 0.5) * 0.3,
-    o: Math.random() * 0.4 + 0.1,
-    c: ['#00e5ff','#1a6fff','#aa44ff','#ff2d78'][Math.floor(Math.random()*4)]
-  });
+// Clock
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = h+':'+m+':'+s;
 }
+setInterval(updateClock, 1000);
+updateClock();
 
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.c;
-    ctx.globalAlpha = p.o;
-    ctx.fill();
-    p.x += p.dx; p.y += p.dy;
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-  });
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-// ── SCROLL PROGRESS ──
-window.addEventListener('scroll', () => {
-  const p = document.getElementById('progress');
-  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  p.style.width = pct + '%';
-});
-
-// ── COUNT UP ──
-const counters = document.querySelectorAll('[data-count]');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = +el.dataset.count;
-      const suffix = target >= 1000 ? '+' : '+';
-      let count = 0;
-      const step = Math.ceil(target / 60);
-      const timer = setInterval(() => {
-        count += step;
-        if (count >= target) { count = target; clearInterval(timer); }
-        el.textContent = count.toLocaleString() + suffix;
-      }, 20);
-      observer.unobserve(el);
-    }
-  });
-});
-counters.forEach(c => observer.observe(c));
-
-// ── SMOOTH SCROLL ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
+// Tab switching
+document.querySelectorAll('.top-nav a').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.top-nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
   });
 });
 
-// ── NAVBAR SCROLL EFFECT ──
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  nav.style.background = window.scrollY > 50
-    ? 'rgba(4,4,15,0.98)'
-    : 'rgba(4,4,15,0.85)';
+// Game card hover glow effect
+document.querySelectorAll('.game-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.background = `radial-gradient(circle at ${x}% ${y}%, #1e1e40, #13132a)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
 });
 </script>
 </body>
